@@ -24,11 +24,21 @@
       width: 273.2px;
       overflow: hidden;
       transition: width .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: scale .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .subbed{
       width: 366.7px;
     }
-
+    @keyframes scale {
+      0%{
+        transform: translateY(100%);
+        width: 0;
+      }
+      100%{
+        transform: translateY(0);
+        width: 273.2px;
+      }
+    }
     button {
       display: inline-block;
       font-size: 2rem;
@@ -109,6 +119,25 @@
     .show #none{
       display: none;
     }
+    .close{
+      width: 0;
+      animation: close 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      transform: translateY(100%);
+    }
+    @keyframes close {
+      0%{
+        width: 366.7px;
+        transform: translateY(0);
+      }
+      75%{
+        width: 366.7px;
+        transform: translateY(0);
+      }
+      100%{
+        width: 0;
+        transform: translateY(100%);
+      }
+    }
   </style>
 </head>
 
@@ -131,8 +160,8 @@
     </button>
   </div>
   <script>
+    let parrent = document.querySelector('.container')
     function change() {
-      let parrent = document.querySelector('.container')
       let btn = document.querySelector('.sub');
       parrent.classList.add('subbed');
       btn.querySelector('span').innerText = "SUBSCRIBED";
@@ -142,6 +171,7 @@
     function notif() {
       let btn = document.querySelector('.notif');
       btn.classList.add('show')
+      parrent.classList.add('close')
     }
   </script>
 </body>
