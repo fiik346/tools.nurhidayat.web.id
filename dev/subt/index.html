@@ -36,16 +36,16 @@
 
     table {
       border-spacing: 0.5rem;
-    }
-
-    table {
+      width: 100%;
       border-collapse: collapse;
     }
 
     .custom-file-input {
-      width: 0;
-      height: 0;
-      margin-bottom: 2rem;
+      position: relative;
+      padding-left: 3rem;
+      height: 1.7rem;
+      display: flex;
+      align-items: center;
     }
 
     .custom-file-input::-webkit-file-upload-button {
@@ -60,6 +60,7 @@
       border: 1px solid #999;
       border-radius: 3px;
       padding: 5px 8px;
+      left: 0;
       outline: none;
       white-space: nowrap;
       -webkit-user-select: none;
@@ -78,18 +79,48 @@
     }
 
     .source {
+      width: 100%;
       max-width: 100%;
-      max-height: calc(100vh - 4rem);
+      max-height: calc(100vh - 8rem);
       overflow: auto;
+      scroll-behavior: smooth;
+    }
+
+    button {
+      display: inline-block;
+      background: linear-gradient(to top, #f9f9f9, #e3e3e3);
+      border: 1px solid #999;
+      border-radius: 3px;
+      padding: 5px 8px;
+      outline: none;
+      white-space: nowrap;
+      -webkit-user-select: none;
+      cursor: pointer;
+      text-shadow: 1px 1px #fff;
+      font-weight: 700;
+      font-size: 10pt;
+    }
+
+    button:hover {
+      border-color: #000;
     }
   </style>
 </head>
 
 <body>
+  <p>
+  <h1 class='notranslate'>Subtitle Translator (Beta)</h1>
+  <br />
   <input type="file" id="fileinput" class="custom-file-input">
+  <br />
+  <button onclick="clickScroll()">Scroll</button>
+  <button onclick="saveData()" class='notranslate'>Save As</button>
+  </p>
+  <div id="google_translate_element"></div>
+  <p></p>
   <section class="source">
-    <table id="array">
-      <thead>
+    <table id="array" onchange="clickScroll()">
+      <thead class='notranslate'>
         <tr>
           <th>Index</th>
           <th>Time</th>
@@ -97,15 +128,29 @@
           <th>Translated text</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class='notranslate'>
         <th>1</th>
         <td>00:00:12,982 --> 00:00:15,922</td>
         <td>Example text</td>
-        <td>Example text</td>
+        <td class="text">Example text</td>
       </tbody>
     </table>
   </section>
-  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="2.js"></script>
+  <script>
+
+    function googleTranslateElementInit() {
+
+      new google.translate.TranslateElement({
+
+        pageLanguage: 'en'
+
+      }, 'google_translate_element');
+
+    }
+
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 </html>
